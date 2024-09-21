@@ -1,0 +1,149 @@
+/* src/App.css */
+* {
+  box-sizing: border-box;
+}
+/* 让 .app 保持居中 */
+body, html, .app {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.app {
+  display: flex;
+  justify-content: center; /* 保持居中 */
+  align-items: center;
+  flex-direction: column;
+  width: 100%; /* 确保宽度为100% */
+  padding: 0; /* 清除不必要的内边距 */
+}
+
+
+.box-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 2fr)) ;
+  gap: 10px;
+  justify-content: center;
+  align-items: end;  /* 确保所有盒子底部对齐 */
+  padding: 0 0 !important;  
+  margin: 0 auto !important; 
+}
+
+
+
+.box {
+  border: 1px solid black;
+  color: white;
+  margin: 5px 0; /* 上下方向取消margin重叠，只保留水平方向 */
+  padding: 10px; /* 使用padding代替上下的margin，避免重叠 */
+  display: flex;
+  flex-direction: column;
+  background-color: #1f1f1f;
+  align-items: center;
+  justify-content: space-between;
+  border-radius: 6px;  /* 圆角设置 */
+  border: 2px solid #d8d8d8;
+  /* 设置渐变颜色：顶部和底部是 #1f1f1f，向中间渐变为 #6a6a6a */
+  background: linear-gradient(to bottom, #1f1f1f, #6a6a6a 50%, #1f1f1f);
+  /* height: 100%; */
+  position: relative;  /* 让伪元素相对于盒子定位 */
+   /* 添加以下属性以保持拖拽时的页面大小不变 */
+   min-height: 200px;   
+   max-height: 300px;   
+   /* height: 300px; */
+  /* width: 100%; */
+  /* height: auto;s */
+  flex-shrink: 0; /* 防止拖拽时盒子缩小 */
+   overflow: hidden;    /* 避免内容溢出 */
+   align-self: end;  /* 强制盒子在网格中底部对齐 */
+}
+/* 添加横竖灰线 */
+.box::before, .box::after {
+  content: '';
+  position: absolute;
+  background-color: #dadada;  /* 线条颜色 */
+}
+
+/* 横线 */
+.box::before {
+  width: 100%;  /* 横线宽度 */
+  height: 1px;  /* 线条高度 */
+  top: 8px;  /* 横线位置，距离顶部10% */
+  left: 0%;  /* 横线居中，左右留 5% 的边距 */
+}
+
+/* 竖线 */
+.box::after {
+  width: 1px;
+  height: 100%;
+  top: 0%;
+  left: 6%;
+}
+
+.status-label {
+  display: inline-block;  /* 让状态标签以块元素显示，方便应用边距 */
+  background-color: white;  /* 背景颜色设为白色 */
+  color: black;  /* 文本颜色为黑色 */
+  padding: 5px 10px;  /* 增加上下左右内边距 */
+  border-radius: 20px;  /* 圆角设置 */
+  font-size: 14px;  /* 设置合适的字体大小 */
+  font-weight: bold;  /* 加粗文本 */
+  border: 1px solid #ddd;  /* 为标签添加边框 */
+}
+
+/* 适用于不同尺寸的箱子 */
+.large-box {
+  width: 100%;  /* 宽度保持与容器一致 */
+  aspect-ratio: 1 / 2;  /* 高度为宽度的两倍 */
+ 
+}
+
+.medium-box {
+  width: 100%;  /* 宽度与large-box一致 */
+  aspect-ratio: 1 / 1;  /* 高宽相等 */
+  
+}
+/* 根据状态设置不同颜色 */
+.completed {
+  background-color: green;  /* 完成状态使用绿色 */
+  color: white;
+}
+
+.pending {
+  background-color: white;  /* 待配备使用灰色 */
+  color: black;
+}
+
+.progress {
+  background-color: orange;  /* 进展状态使用橙色 */
+  color: white;
+}
+@media only screen and (max-width: 600px) {
+  .box-container {
+    grid-template-columns: repeat(2, 1fr); /* 每行显示2个箱子 */
+  }
+}
+
+@media only screen and (min-width: 600px) {
+  .box-container {
+    grid-template-columns: repeat(4, 1fr); /* 每行显示3个箱子 */
+  }
+}
+@media only screen and (min-width: 912px) {
+  .box-container {
+    grid-template-columns: repeat(4, 1fr); /* 每行显示3个箱子 */
+  }
+}
+
+/* 针对特定屏幕尺寸进行调整 */
+@media only screen and (min-width: 1024px) {
+  .box-container {
+    grid-template-columns: repeat(4, 1fr); /* 控制每行显示的盒子数量 */
+  }
+}
+
+@media only screen and (min-width: 1440px) {
+  .box-container {
+    grid-template-columns: repeat(4, 1fr); /* 控制在更大屏幕上显示更多的盒子 */
+  }
+}
